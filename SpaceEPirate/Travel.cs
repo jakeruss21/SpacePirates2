@@ -20,6 +20,8 @@ namespace SpaceEPirate
             int j = 1;
             int option = 0;
 
+            UserProfile.PrintUserInfo(player, currentShip);
+
             for(int i = 0; i < smallGalaxy.Length; i++)
             {
                 distance[i] = DistanceToPlanet(currentPlanet, smallGalaxy[i]);
@@ -33,7 +35,7 @@ namespace SpaceEPirate
                 {
                     if (distance[i] > 0 && distance[i] <= currentShip.fuelCapacity)
                     {
-                        Console.WriteLine($"{j}. Planet {smallGalaxy[i].planetName} is {distance[i]} light years away");
+                        Console.WriteLine($"{j}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
                         j++;
                     }
                 }
