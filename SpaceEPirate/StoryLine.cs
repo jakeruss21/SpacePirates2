@@ -9,7 +9,7 @@ namespace SpaceEPirate
         static void StartPage(string title = "")
         {
             Console.Title = "ASCII Art";
-             title = @"
+            title = @"
   ██████  ██▓███   ▄▄▄       ▄████▄  ▓█████     ██▓███   ██▓ ██▀███   ▄▄▄     ▄▄▄█████▓▓█████   ██████ 
 ▒██    ▒ ▓██░  ██▒▒████▄    ▒██▀ ▀█  ▓█   ▀    ▓██░  ██▒▓██▒▓██ ▒ ██▒▒████▄   ▓  ██▒ ▓▒▓█   ▀ ▒██    ▒ 
 ░ ▓██▄   ▓██░ ██▓▒▒██  ▀█▄  ▒▓█    ▄ ▒███      ▓██░ ██▓▒▒██▒▓██ ░▄█ ▒▒██  ▀█▄ ▒ ▓██░ ▒░▒███   ░ ▓██▄   
@@ -131,7 +131,7 @@ namespace SpaceEPirate
                         Console.ReadLine();
                         break;
                     case 3:
-                        Travel();
+                        Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
                         break;
                     default:
                         break;
@@ -139,14 +139,5 @@ namespace SpaceEPirate
             } while (option > 3);
 
         }
-
-               
-        internal static void Travel()
-        {
-            //Put code here
-            Console.WriteLine("Nothing here yet");
-        }
-
     }
-
 }
