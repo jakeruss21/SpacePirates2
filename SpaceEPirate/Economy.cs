@@ -17,7 +17,7 @@ namespace SpaceEPirate
             {
                 UserProfile.PrintUserInfo(player, currentShip);
                 Console.WriteLine($"What would you like to do? \n1. Buy \n2. Sell \n3. View Inventory \n 4. Go to Planet Menu");
-                Console.WriteLine("Hello World!");
+
                 option = Utility.ErrorHandler(numOptions);
 
                 switch (option)
