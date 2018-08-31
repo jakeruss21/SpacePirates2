@@ -90,11 +90,13 @@ namespace SpaceEPirate
         static void BeginAdventure(UserProfile player, PlanetFactory[] smallGalaxy, SpaceShip[] spaceShip, TradeGood[] cargoInventory, int setPlanet)
         {
             int option = 0;
-            int menuOptions = 3;
+            int menuOptions = 4;
 
             PlanetFactory currentPlanet = smallGalaxy[setPlanet];
 
             int[] setGoodPrice = new int[cargoInventory.Length]; //Set prices of goods at new Planet
+
+            SpaceShip currentShip = spaceShip[0];
 
             // Need a loop here so that the player can continue to play for '40' years
 
@@ -104,33 +106,37 @@ namespace SpaceEPirate
                 cargoInventory[i].cost = setGoodPrice[i];
             }
 
-            SpaceShip currentShip = spaceShip[0];
-
-            UserProfile.PrintUserInfo(player, currentShip);
-            Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \n1.The Trader's Market \n2.Shipshape Ship Shop\n3.Travel to next planet");
-
-            option = Utility.ErrorHandler(menuOptions);
-
-            Console.Clear();
-
-            switch (option)
+            do
             {
-                case 1:
-                    Economy.MarketPlace(cargoInventory, player, currentShip);  //Pass current ShipObject, GoodObjects, and UserProfile object
-                    Console.Read();
-                    break;
-                case 2:
-                    SpaceShip.ShipGarage(spaceShip, player);
-                    currentShip = SpaceShip.ShipGarage(spaceShip, player);
-                    Console.WriteLine($"You have purchased the {currentShip.shipName}");
-                    Console.ReadLine();
-                    break;
-                case 3:
-                    Travel();
-                    break;
-                default:
-                    break;
-            }
+
+                UserProfile.PrintUserInfo(player, currentShip);
+                Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \n1.The Trader's Market \n2.Shipshape Ship Shop\n" +
+                                  $"3.Travel to next planet \n4. Quit the Game");
+
+                option = Utility.ErrorHandler(menuOptions);
+
+                Console.Clear();
+
+                switch (option)
+                {
+                    case 1:
+                        Economy.MarketPlace(cargoInventory, player, currentShip);  //Pass current ShipObject, GoodObjects, and UserProfile object
+                        Console.Read();
+                        break;
+                    case 2:
+                        SpaceShip.ShipGarage(spaceShip, player);
+                        currentShip = SpaceShip.ShipGarage(spaceShip, player);
+                        Console.WriteLine($"You have purchased the {currentShip.shipName}");
+                        currentShip.shipCost = 0;
+                        Console.ReadLine();
+                        break;
+                    case 3:
+                        Travel();
+                        break;
+                    default:
+                        break;
+                }
+            } while (option > 3);
 
         }
 
