@@ -63,10 +63,8 @@ namespace SpaceEPirate
 
             UserProfile player = new UserProfile();
 
-            int currentPlanet = 0;
-            currentPlanet = PlanetFactory.StartPlanet(smallGalaxy);
             StartPoint(player);
-            BeginAdventure(player, smallGalaxy, shipShop, cargoInventory, currentPlanet);
+            BeginAdventure(player, smallGalaxy, shipShop, cargoInventory);
         }
 
 
@@ -93,12 +91,12 @@ namespace SpaceEPirate
         }
 
 
-        static void BeginAdventure(UserProfile player, PlanetFactory[] smallGalaxy, SpaceShip[] spaceShip, TradeGood[] cargoInventory, int setPlanet)
+        static void BeginAdventure(UserProfile player, PlanetFactory[] smallGalaxy, SpaceShip[] spaceShip, TradeGood[] cargoInventory)
         {
             int option = 0;
             int menuOptions = 4;
 
-            PlanetFactory currentPlanet = smallGalaxy[setPlanet];
+            PlanetFactory currentPlanet = smallGalaxy[0];
 
             int[] setGoodPrice = new int[cargoInventory.Length]; //Set prices of goods at new Planet
 
@@ -112,39 +110,39 @@ namespace SpaceEPirate
             {
                 cargoInventory[i].cost = setGoodPrice[i];
             }
-
             do
             {
-
-                UserProfile.PrintUserInfo(player, currentShip);
-                Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \n1.The Trader's Market \n2.Shipshape Ship Shop\n" +
-                                  $"3.Travel to next planet \n4. Quit the Game");
-
-                option = Utility.ErrorHandler(menuOptions);
-
-                Console.Clear();
-
-                switch (option)
+                do
                 {
-                    case 1:
-                        Economy.MarketPlace(cargoInventory, player, currentShip);  //Pass current ShipObject, GoodObjects, and UserProfile object
-                        Console.Read();
-                        break;
-                    case 2:
-                        SpaceShip.ShipGarage(spaceShip, player);
-                        currentShip = SpaceShip.ShipGarage(spaceShip, player);
-                        Console.WriteLine($"You have purchased the {currentShip.shipName}");
-                        currentShip.shipCost = 0;
-                        Console.ReadLine();
-                        break;
-                    case 3:
-                        currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
-                        break;
-                    default:
-                        break;
-                }
-            } while (option > 2);
 
+                    UserProfile.PrintUserInfo(player, currentShip);
+                    Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \n1.The Trader's Market \n2.Shipshape Ship Shop\n" +
+                                      $"3.Travel to next planet \n4. Quit the Game");
+
+                    option = Utility.ErrorHandler(menuOptions);
+
+                    Console.Clear();
+
+                    switch (option)
+                    {
+                        case 1:
+                            Economy.MarketPlace(cargoInventory, player, currentShip);  //Pass current ShipObject, GoodObjects, and UserProfile object
+                            Console.Read();
+                            break;
+                        case 2:
+                            currentShip = SpaceShip.ShipGarage(spaceShip, currentShip, player);
+                            Console.WriteLine($"You have purchased the {currentShip.shipName}");
+                            currentShip.shipCost = 0;
+                            Console.ReadLine();
+                            break;
+                        case 3:
+                            currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
+                            break;
+                        default:
+                            break;
+                    }
+                } while (option > 2);
+            } while (option >= 4 || player.yearsPlayed >= 40);
         }
     }
 }

@@ -24,10 +24,12 @@ namespace SpaceEPirate
         }
 
         
-       internal static SpaceShip ShipGarage(SpaceShip[] shipShop, UserProfile player)
+       internal static SpaceShip ShipGarage(SpaceShip[] shipShop, SpaceShip currentShip, UserProfile player)
        {
             int numOptions = shipShop.Length;            
             int shipChoice = 0;
+
+            UserProfile.PrintUserInfo(player, currentShip);
 
             Console.WriteLine("Welcome to the ship garage. You may select or buy a ship you would like to fly." +
                               $"You currently have {player.cosmicCredits}cc.");

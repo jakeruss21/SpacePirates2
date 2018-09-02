@@ -18,24 +18,24 @@ namespace SpaceEPirate
         }
 
 
-        public static int StartPlanet(PlanetFactory[] smallGalaxy)
-        {
-            int choice = 0;
+        //public static int StartPlanet(PlanetFactory[] smallGalaxy)
+        //{
+        //    int choice = 0;
 
-            Console.WriteLine("Please enter the number for your starting planet:");
+        //    Console.WriteLine("Please enter the number for your starting planet:");
 
-            for (int i = 0; i < smallGalaxy.Length; i++)
-            {
-                Console.WriteLine($"{ i + 1}. { smallGalaxy[i].planetName }");
-            }
+        //    for (int i = 0; i < smallGalaxy.Length; i++)
+        //    {
+        //        Console.WriteLine($"{ i + 1}. { smallGalaxy[i].planetName }");
+        //    }
 
-            choice = Utility.ErrorHandler(smallGalaxy.Length) - 1;
+        //    choice = Utility.ErrorHandler(smallGalaxy.Length) - 1;
 
-            Console.WriteLine($"You have chosen to begin on Planet {smallGalaxy[choice].planetName}.");
-            Console.ReadLine();
-            Console.Clear();
-            return choice;
-        }
+        //    Console.WriteLine($"You have chosen to begin on Planet {smallGalaxy[choice].planetName}.");
+        //    Console.ReadLine();
+        //    Console.Clear();
+        //    return choice;
+        //}
 
 
 
