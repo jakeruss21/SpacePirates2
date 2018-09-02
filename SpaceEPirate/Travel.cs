@@ -17,7 +17,7 @@ namespace SpaceEPirate
         internal static void GoSomewhere(UserProfile player, SpaceShip currentShip, PlanetFactory currentPlanet, PlanetFactory[] smallGalaxy)
         {
             double[] distance = new double[smallGalaxy.Length];
-            int j = 1;
+            int j = 0;
             int option = 0;
 
             UserProfile.PrintUserInfo(player, currentShip);
@@ -31,18 +31,17 @@ namespace SpaceEPirate
             {
                 Console.WriteLine("Please choose a destination");
 
-                for (int i = 0; i < smallGalaxy.Length; i++)
+                for (int i = 0; i < smallGalaxy.Length; i++, j++)
                 {
                     if (distance[i] > 0 && distance[i] <= currentShip.fuelCapacity)
                     {
-                        Console.WriteLine($"{j}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
-                        j++;
+                        Console.WriteLine($"{i+1}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
                     }
                 }
 
                 Console.WriteLine("\n");
 
-                option = Utility.ErrorHandler(j);
+                option = (Utility.ErrorHandler(i) - 1);
 
             } while (j < 4);
 
