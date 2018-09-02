@@ -107,6 +107,7 @@ namespace SpaceEPirate
             // Need a loop here so that the player can continue to play for '40' years
 
             setGoodPrice = PlanetFactory.MarketValue(setGoodPrice.Length);
+
             for (int i = 0; i < setGoodPrice.Length; i++)
             {
                 cargoInventory[i].cost = setGoodPrice[i];
@@ -137,12 +138,12 @@ namespace SpaceEPirate
                         Console.ReadLine();
                         break;
                     case 3:
-                        Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
+                        currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
                         break;
                     default:
                         break;
                 }
-            } while (option > 3);
+            } while (option > 2);
 
         }
     }

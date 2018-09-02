@@ -14,7 +14,7 @@ namespace SpaceEPirate
             return distance;
         }
 
-        internal static void GoSomewhere(UserProfile player, SpaceShip currentShip, PlanetFactory currentPlanet, PlanetFactory[] smallGalaxy)
+        internal static PlanetFactory GoSomewhere(UserProfile player, SpaceShip currentShip, PlanetFactory currentPlanet, PlanetFactory[] smallGalaxy)
         {
             double[] distance = new double[smallGalaxy.Length];
             int i = 0;
@@ -27,10 +27,9 @@ namespace SpaceEPirate
                 distance[i] = DistanceToPlanet(currentPlanet, smallGalaxy[i]);
             }
 
+            Console.WriteLine("Please choose a destination");
             do
             {
-                Console.WriteLine("Please choose a destination");
-
                 for (i = 0; i < smallGalaxy.Length; i++)
                 {
                     if (distance[i] > 0 && distance[i] <= currentShip.fuelCapacity)
@@ -38,12 +37,19 @@ namespace SpaceEPirate
                         Console.WriteLine($"{i + 1}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
                     }
                 }
-
                 Console.WriteLine("\n");
-
                 option = (Utility.ErrorHandler(i) - 1);
 
-            } while (i < 4);
+                if (currentShip.fuelCapacity < distance[option])
+                {
+                    Console.WriteLine("You do not have enough fuel to reach that planet, please try again.\n");
+                }
+            }while (currentShip.fuelCapacity < distance[option]);
+
+            currentShip.fuelCapacity = currentShip.fuelCapacity - distance[option];
+
+            currentPlanet = smallGalaxy[option];
+            return currentPlanet;
         }
 
         private static int GetWarpSpeed(SpaceShip currentShip)
