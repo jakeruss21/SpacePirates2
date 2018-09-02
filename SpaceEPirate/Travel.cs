@@ -44,7 +44,17 @@ namespace SpaceEPirate
                 option = (Utility.ErrorHandler(i) - 1);
 
             } while (j < 4);
+             private static int GetWarpSpeed(Ship currentShip)
+        {
 
+            int warpSpeed;
+            do
+            {
+                Console.WriteLine(
+                    $"Please enter your warp speed (Your ship has a max warp speed of {currentShip.GetMaxWarpSpeed()}");
+                warpSpeed = UserInterface.GetInput();
+            } while (warpSpeed > currentShip.GetMaxWarpSpeed());
+            return warpSpeed;
         }
     }
 }

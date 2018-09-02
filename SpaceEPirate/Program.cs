@@ -6,7 +6,9 @@ namespace SpaceEPirate
     {
         static void Main(string[] args)
         {
-            
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
 
             StoryLine.Run();
             //StoryLine class
