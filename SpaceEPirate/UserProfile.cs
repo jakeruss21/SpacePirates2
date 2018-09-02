@@ -35,12 +35,5 @@ namespace SpaceEPirate
         {
             Console.WriteLine($"Name: {player.userName}   Credits: {player.cosmicCredits}      Ship: {currentShip.shipName}      Fuel: {currentShip.fuelCapacity} \n");
         }
-
-
-
-
-
-
-
     }
 }

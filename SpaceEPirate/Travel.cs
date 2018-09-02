@@ -17,12 +17,12 @@ namespace SpaceEPirate
         internal static void GoSomewhere(UserProfile player, SpaceShip currentShip, PlanetFactory currentPlanet, PlanetFactory[] smallGalaxy)
         {
             double[] distance = new double[smallGalaxy.Length];
-            int j = 0;
+            int i = 0;
             int option = 0;
 
             UserProfile.PrintUserInfo(player, currentShip);
 
-            for(int i = 0; i < smallGalaxy.Length; i++)
+            for (i = 0; i < smallGalaxy.Length; i++)
             {
                 distance[i] = DistanceToPlanet(currentPlanet, smallGalaxy[i]);
             }
@@ -31,11 +31,11 @@ namespace SpaceEPirate
             {
                 Console.WriteLine("Please choose a destination");
 
-                for (int i = 0; i < smallGalaxy.Length; i++, j++)
+                for (i = 0; i < smallGalaxy.Length; i++)
                 {
                     if (distance[i] > 0 && distance[i] <= currentShip.fuelCapacity)
                     {
-                        Console.WriteLine($"{i+1}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
+                        Console.WriteLine($"{i + 1}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
                     }
                 }
 
@@ -43,17 +43,18 @@ namespace SpaceEPirate
 
                 option = (Utility.ErrorHandler(i) - 1);
 
-            } while (j < 4);
-             private static int GetWarpSpeed(Ship currentShip)
+            } while (i < 4);
+        }
+
+        private static int GetWarpSpeed(SpaceShip currentShip)
         {
 
             int warpSpeed;
             do
             {
-                Console.WriteLine(
-                    $"Please enter your warp speed (Your ship has a max warp speed of {currentShip.GetMaxWarpSpeed()}");
-                warpSpeed = UserInterface.GetInput();
-            } while (warpSpeed > currentShip.GetMaxWarpSpeed());
+                Console.WriteLine($"Please enter your warp speed (Your ship has a max warp speed of {currentShip.topSpeed}");
+                warpSpeed = Utility.ErrorHandler(currentShip.topSpeed);
+            } while (warpSpeed > currentShip.topSpeed);
             return warpSpeed;
         }
     }
