@@ -78,7 +78,7 @@ namespace SpaceEPirate
             timeTraveled = (int)((365 / speed) * distance);
             Console.WriteLine($"You traveled {distance.ToString("#.00")} lightyears in {timeTraveled} days");
             Console.Read();
-
+            Console.Clear();
             return timeTraveled;
         }
     }

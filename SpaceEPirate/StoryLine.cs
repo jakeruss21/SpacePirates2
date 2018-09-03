@@ -102,7 +102,6 @@ namespace SpaceEPirate
 
             SpaceShip currentShip = spaceShip[0];
 
-            // Need a loop here so that the player can continue to play for '40' years
             do
             {
                 setGoodPrice = PlanetFactory.MarketValue(setGoodPrice.Length);
@@ -143,7 +142,7 @@ namespace SpaceEPirate
 
                 } while (option < 3);
 
-            } while (option < 4 || player.daysPlayed <= 14600);
+            } while(option <= 3 || player.daysPlayed <= 14600);
 
             Console.WriteLine("The Game is over");
             Console.Read();
