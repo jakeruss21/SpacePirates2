@@ -52,11 +52,12 @@ namespace SpaceEPirate
                 };
 
             // Create space ships as objects
-            SpaceShip[] shipShop = new SpaceShip[3]
+            SpaceShip[] shipShop = new SpaceShip[]
             {
                 new SpaceShip("Simple Simon", 000, 3000, 10, 4),
                 new SpaceShip("Space Knight", 5000, 3500, 40, 7),
                 new SpaceShip("Avenger jet", 10000, 2000, 100, 9)
+                
             };
 
             StartPage();
@@ -89,7 +90,16 @@ namespace SpaceEPirate
             Console.ReadLine();
             Console.Clear();
         }
+        public void EndGameMessage(UserProfile Player, string exitMessage)
+        {
+            var totalIncome = Player.cosmicCredits - 1000;
+            Console.WriteLine(exitMessage);
+            Console.WriteLine($"Your time has come to an end{Player.userName}. Dont feel down young" +
+                $"Padawan your efforts were not useless, during your your adventures you have {totalIncome}" +
+                $"and have played {Player.daysPlayed}.");
 
+
+        }
 
         static void BeginAdventure(UserProfile player, PlanetFactory[] smallGalaxy, SpaceShip[] spaceShip, TradeGood[] cargoInventory)
         {
@@ -136,6 +146,7 @@ namespace SpaceEPirate
                         case 3:
                             currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
                             break;
+                        
                         default:
                             break;
                     }
@@ -147,6 +158,10 @@ namespace SpaceEPirate
 
             Console.WriteLine("The Game is over");
             Console.Read();
+
         }
+        
+
+
     }
 }
