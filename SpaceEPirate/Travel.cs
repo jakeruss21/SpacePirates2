@@ -46,22 +46,36 @@ namespace SpaceEPirate
                 }
             }while (currentShip.fuelCapacity < distance[option]);
 
+            double warpSpeed = GetWarpSpeed(currentShip);
+
+            double timePassed = TravelTime(warpSpeed, distance[option]);
+
             currentShip.fuelCapacity = currentShip.fuelCapacity - distance[option];
+            player.yearsPlayed += timePassed;
 
             currentPlanet = smallGalaxy[option];
             return currentPlanet;
         }
 
-        private static int GetWarpSpeed(SpaceShip currentShip)
+        private static double GetWarpSpeed(SpaceShip currentShip)
         {
 
             int warpSpeed;
             do
             {
-                Console.WriteLine($"Please enter your warp speed (Your ship has a max warp speed of {currentShip.topSpeed}");
+                Console.WriteLine($"Please enter your warp speed (Your ship has a max warp speed of {currentShip.topSpeed}):");
                 warpSpeed = Utility.ErrorHandler(currentShip.topSpeed);
             } while (warpSpeed > currentShip.topSpeed);
             return warpSpeed;
+        }
+
+        private static double TravelTime(double warpSpeed, double distance)
+        {
+            double timeTraveled = 0;
+
+
+
+            return timeTraveled;
         }
     }
 }

@@ -103,18 +103,17 @@ namespace SpaceEPirate
             SpaceShip currentShip = spaceShip[0];
 
             // Need a loop here so that the player can continue to play for '40' years
-
-            setGoodPrice = PlanetFactory.MarketValue(setGoodPrice.Length);
-
-            for (int i = 0; i < setGoodPrice.Length; i++)
-            {
-                cargoInventory[i].cost = setGoodPrice[i];
-            }
             do
             {
+                setGoodPrice = PlanetFactory.MarketValue(setGoodPrice.Length);
+
+                for (int i = 0; i < setGoodPrice.Length; i++)
+                {
+                    cargoInventory[i].cost = setGoodPrice[i];
+                }
+
                 do
                 {
-
                     UserProfile.PrintUserInfo(player, currentShip);
                     Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \n1.The Trader's Market \n2.Shipshape Ship Shop\n" +
                                       $"3.Travel to next planet \n4. Quit the Game");
@@ -127,7 +126,6 @@ namespace SpaceEPirate
                     {
                         case 1:
                             Economy.MarketPlace(cargoInventory, player, currentShip);  //Pass current ShipObject, GoodObjects, and UserProfile object
-                            Console.Read();
                             break;
                         case 2:
                             currentShip = SpaceShip.ShipGarage(spaceShip, currentShip, player);
@@ -141,8 +139,11 @@ namespace SpaceEPirate
                         default:
                             break;
                     }
-                } while (option > 2);
-            } while (option >= 4 || player.yearsPlayed >= 40);
+                    Console.Clear();
+
+                } while (option < 3);
+
+            } while (option < 4 || player.yearsPlayed <= 40);
         }
     }
 }

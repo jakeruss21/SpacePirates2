@@ -8,7 +8,7 @@ namespace SpaceEPirate
     {
         public string userName = "";
         public int cosmicCredits = 1000;
-        public int yearsPlayed;
+        public double yearsPlayed;
 
         public UserProfile()
         {
@@ -34,7 +34,7 @@ namespace SpaceEPirate
         internal static void PrintUserInfo(UserProfile player, SpaceShip currentShip)
         {
             Console.WriteLine($"Name: {player.userName}   Credits: {player.cosmicCredits}      Ship: {currentShip.shipName}      " +
-                              $"Fuel: {currentShip.fuelCapacity}   Cargo Space: {currentShip.fuelCapacity}\n");
+                              $"Fuel: {currentShip.fuelCapacity}   Cargo Space: {currentShip.cargoCapacity}\n");
         }
     }
 }
