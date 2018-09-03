@@ -6,12 +6,12 @@ namespace SpaceEPirate
 {
     class Utility
     {
-        public static int ErrorHandler(int numOptions = 2147483647)
+        public static int ErrorHandler(int numOptions)
         {
             Boolean answer = false;
             int option = 0;
 
-            while (option < 1 || option > numOptions)
+            do
             {
                 do
                 {
@@ -33,7 +33,7 @@ namespace SpaceEPirate
                     Console.Write("Please enter a valid option:  ");
                 }
                 else { }
-            }
+            } while (option <= 0 || option > numOptions);
 
             return option;
         }

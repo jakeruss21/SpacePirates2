@@ -90,13 +90,13 @@ namespace SpaceEPirate
             Console.ReadLine();
             Console.Clear();
         }
-        public void EndGameMessage(UserProfile Player, string exitMessage)
+        public void EndGameMessage(UserProfile player, string exitMessage)
         {
-            var totalIncome = Player.cosmicCredits - 1000;
+            var totalIncome = player.cosmicCredits - 1000;
             Console.WriteLine(exitMessage);
-            Console.WriteLine($"Your time has come to an end{Player.userName}. Dont feel down young" +
-                $"Padawan your efforts were not useless, during your your adventures you have {totalIncome}" +
-                $"and have played {Player.daysPlayed}.");
+            Console.WriteLine($"Your time has come to an end{player.userName}. Dont feel down young" +
+                $"Padawan your efforts were not useless, during your your adventures you have made {totalIncome}" +
+                $"and have played for {player.daysPlayed} days.");
 
 
         }
@@ -145,7 +145,8 @@ namespace SpaceEPirate
                         case 3:
                             currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
                             break;
-                        
+                        case 4:
+                            break;
                         default:
                             break;
                     }
@@ -153,14 +154,12 @@ namespace SpaceEPirate
 
                 } while (option < 3);
 
-            } while(option <= 3 || player.daysPlayed <= 14600);
+            } while(option != menuOptions || player.daysPlayed >= 14600);
 
             Console.WriteLine("The Game is over");
             Console.Read();
 
         }
-        
-
 
     }
 }

@@ -43,7 +43,7 @@ namespace SpaceEPirate
             Console.WriteLine($"2. {shipShop[1].shipName}      || {shipShop[1].shipCost}CC        ||  {shipShop[1].cargoCapacity}       ");
             Console.WriteLine($"3. {shipShop[2].shipName}       || {shipShop[2].shipCost}CC        ||  {shipShop[2].cargoCapacity}       ");
     
-            shipChoice = Utility.ErrorHandler(numOptions);
+            shipChoice = Utility.ErrorHandler(numOptions) - 1;
             return shipShop[shipChoice];
          
        }
