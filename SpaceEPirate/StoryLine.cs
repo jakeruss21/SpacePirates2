@@ -143,7 +143,10 @@ namespace SpaceEPirate
 
                 } while (option < 3);
 
-            } while (option < 4 || player.yearsPlayed <= 40);
+            } while (option < 4 || player.daysPlayed <= 14600);
+
+            Console.WriteLine("The Game is over");
+            Console.Read();
         }
     }
 }

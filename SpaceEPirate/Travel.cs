@@ -48,10 +48,10 @@ namespace SpaceEPirate
 
             double warpSpeed = GetWarpSpeed(currentShip);
 
-            double timePassed = TravelTime(warpSpeed, distance[option]);
+            int timePassed = TravelTime(warpSpeed, distance[option]);
 
             currentShip.fuelCapacity = currentShip.fuelCapacity - distance[option];
-            player.yearsPlayed += timePassed;
+            player.daysPlayed += timePassed;
 
             currentPlanet = smallGalaxy[option];
             return currentPlanet;
@@ -69,11 +69,15 @@ namespace SpaceEPirate
             return warpSpeed;
         }
 
-        private static double TravelTime(double warpSpeed, double distance)
+        private static int TravelTime(double warpSpeed, double distance)
         {
-            double timeTraveled = 0;
+            int timeTraveled = 0;
+            double speed = 0;
 
-
+            speed = Math.Pow(warpSpeed, (10 / 3)) + Math.Pow((10 - warpSpeed), (-11 / 3));
+            timeTraveled = (int)((365 / speed) * distance);
+            Console.WriteLine($"You traveled {distance.ToString("#.00")} lightyears in {timeTraveled} days");
+            Console.Read();
 
             return timeTraveled;
         }
