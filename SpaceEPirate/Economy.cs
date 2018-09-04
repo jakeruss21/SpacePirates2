@@ -73,7 +73,12 @@ namespace SpaceEPirate
             Console.WriteLine("What would you like to sell?");
             goodType = Utility.ErrorHandler(numOptions) - 1;
 
-            if (cargoInventory[goodType].quantity > 0)
+            if (goodType == -1)
+            {
+                Console.WriteLine("You are now returning to the Market Menu...");
+                System.Threading.Thread.Sleep(1500);
+            }
+            else if (cargoInventory[goodType].quantity > 0)
             {
                 Console.WriteLine($"How much of {cargoInventory[goodType].goodName} would you like to sell?" +
                                   $"  You have currently have {cargoInventory[goodType].quantity} pieces of this product available to sell.");

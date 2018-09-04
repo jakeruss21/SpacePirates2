@@ -32,7 +32,8 @@ namespace SpaceEPirate
             do
             {
                 UserProfile.PrintUserInfo(player, currentShip);
-                Console.WriteLine($"What would you like to do? \n1. Buy a ship\n2. Refuel your ship \n3. Return to Planet Menu");
+                Console.WriteLine($"Welcome to Ship Shape's Ship Shop!\n" +
+                                  $"What would you like to do? \n1. Buy a ship\n2. Refuel your ship \n3. Return to Planet Menu");
 
                 option = Utility.ErrorHandler(numOptions);
 
