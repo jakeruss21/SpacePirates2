@@ -50,6 +50,12 @@ namespace SpaceEPirate
                 System.Threading.Thread.Sleep(1000);
                 return currentShip;
             }
+            else if (shipChoice < player.cosmicCredits)
+            {
+                Console.WriteLine("Sorry bud, you dont have enough cosmic credits to upgrade your ride. ");
+                Console.WriteLine("Please try again");
+                return currentShip;
+            }
             else
             {
                 return shipShop[shipChoice];
