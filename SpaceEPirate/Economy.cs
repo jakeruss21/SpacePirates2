@@ -51,11 +51,11 @@ namespace SpaceEPirate
 
             Console.WriteLine($"Please enter the number for the good you would like to purchase");
             Console.WriteLine($"=========================================================================");
-            Console.WriteLine($"Item                 || Cost per Unit    || Cargo space required per unit");
-            Console.WriteLine($"1. {tradeGoods[0].goodName}            || {tradeGoods[0].cost}CC              || {tradeGoods[0].size} ");
-            Console.WriteLine($"2. {tradeGoods[1].goodName}               || {tradeGoods[1].cost}CC                 || {tradeGoods[1].size} ");
-            Console.WriteLine($"3. {tradeGoods[2].goodName}              || {tradeGoods[2].cost}CC             || {tradeGoods[2].size} ");
-            Console.WriteLine($"4. {tradeGoods[3].goodName}            || {tradeGoods[3].cost}CC               || {tradeGoods[3].size} ");
+            Console.WriteLine($"Item          Cost per Unit        Cargo space required per unit");
+            Console.WriteLine($"1. {tradeGoods[0].goodName}              {tradeGoods[0].cost}CC                    {tradeGoods[0].size} ");
+            Console.WriteLine($"2. {tradeGoods[1].goodName}           {tradeGoods[1].cost}CC                    {tradeGoods[1].size} ");
+            Console.WriteLine($"3. {tradeGoods[2].goodName}             {tradeGoods[2].cost}CC                   {tradeGoods[2].size} ");
+            Console.WriteLine($"4. {tradeGoods[3].goodName}         {tradeGoods[3].cost}CC                    {tradeGoods[3].size} ");
 
             goodType = Utility.ErrorHandler(numOptions);
 

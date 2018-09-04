@@ -35,7 +35,7 @@ namespace SpaceEPirate
                               $"You currently have {player.cosmicCredits}cc.");
             Console.ReadLine();
 
-            Console.WriteLine($"Please enter the number for the good you buy or fly");
+            Console.WriteLine($"Please enter the number for the spaceship you want to buy or fly");
             Console.WriteLine($"=========================================================================");
             Console.WriteLine($"Item                 || Cost of Ship  || Amount of Cargo space avalible ");
             Console.WriteLine($"=========================================================================");
