@@ -44,8 +44,16 @@ namespace SpaceEPirate
             Console.WriteLine($"3. {shipShop[2].shipName}       || {shipShop[2].shipCost}CC        ||  {shipShop[2].cargoCapacity}       ");
     
             shipChoice = Utility.ErrorHandler(numOptions) - 1;
-            return shipShop[shipChoice];
-         
+            if (shipChoice < 0)
+            {
+                Console.WriteLine("Invalid Option.  \"Good bye\"");
+                System.Threading.Thread.Sleep(1000);
+                return currentShip;
+            }
+            else
+            {
+                return shipShop[shipChoice];
+            }
        }
         
        

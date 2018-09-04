@@ -28,12 +28,12 @@ namespace SpaceEPirate
                     }
                 } while (answer == false);
 
-                if (option < 1 || option > numOptions)
+                if (option < 0 || option > numOptions)
                 {
                     Console.Write("Please enter a valid option:  ");
                 }
                 else { }
-            } while (option <= 0 || option > numOptions);
+            } while (option < 0 || option > numOptions);
 
             return option;
         }
