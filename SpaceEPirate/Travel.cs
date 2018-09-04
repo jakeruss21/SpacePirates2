@@ -18,6 +18,7 @@ namespace SpaceEPirate
         {
             double[] distance = new double[smallGalaxy.Length];
             int i = 0;
+            int j = 0;
             int option = 0;
 
             UserProfile.PrintUserInfo(player, currentShip);
@@ -35,26 +36,45 @@ namespace SpaceEPirate
                     if (distance[i] > 0 && distance[i] <= currentShip.fuelCapacity)
                     {
                         Console.WriteLine($"{i + 1}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
+                        j++;
                     }
                 }
-                Console.WriteLine("\n");
-                option = (Utility.ErrorHandler(i) - 1);
 
-                if (currentShip.fuelCapacity < distance[option])
+                if (j == 0)
                 {
-                    Console.WriteLine("You do not have enough fuel to reach that planet, please try again.\n");
+                    option = 0;
+                    Console.WriteLine($"There are no planets within range.  Go fuel up the {currentShip.shipName}.");
+                    Console.Read();
+                    distance[option] = 0;
+                }
+                else
+                {
+                    Console.WriteLine("\n");
+                    option = (Utility.ErrorHandler(i) - 1);
+
+                    if (currentShip.fuelCapacity < distance[option])
+                    {
+                        Console.WriteLine("You do not have enough fuel to reach that planet, please try again.\n");
+                    }
                 }
             }while (currentShip.fuelCapacity < distance[option]);
 
-            double warpSpeed = GetWarpSpeed(currentShip);
+            if (j == 0)
+            {
+                return currentPlanet;
+            }
+            else
+            {
+                double warpSpeed = GetWarpSpeed(currentShip);
 
-            int timePassed = TravelTime(warpSpeed, distance[option]);
+                int timePassed = TravelTime(warpSpeed, distance[option]);
 
-            currentShip.fuelCapacity = currentShip.fuelCapacity - distance[option];
-            player.daysPlayed += timePassed;
+                currentShip.fuelCapacity = currentShip.fuelCapacity - distance[option];
+                player.daysPlayed += timePassed;
 
-            currentPlanet = smallGalaxy[option];
-            return currentPlanet;
+                currentPlanet = smallGalaxy[option];
+                return currentPlanet;
+            }
         }
 
         private static double GetWarpSpeed(SpaceShip currentShip)

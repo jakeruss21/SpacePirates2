@@ -66,6 +66,7 @@ namespace SpaceEPirate
 
             StartPoint(player);
             BeginAdventure(player, smallGalaxy, shipShop, cargoInventory);
+            EndGameMessage(player, "");
         }
 
 
@@ -90,15 +91,15 @@ namespace SpaceEPirate
             Console.ReadLine();
             Console.Clear();
         }
-        public void EndGameMessage(UserProfile player, string exitMessage)
+        public static void EndGameMessage(UserProfile player, string exitMessage)
         {
             var totalIncome = player.cosmicCredits - 1000;
             Console.WriteLine(exitMessage);
-            Console.WriteLine($"Your time has come to an end{player.userName}. Dont feel down young" +
-                $"Padawan your efforts were not useless, during your your adventures you have made {totalIncome}" +
-                $"and have played for {player.daysPlayed} days.");
-
-
+            Console.WriteLine($"Your time has come to an end {player.userName}. Dont feel down young " +
+                $"Padawan your efforts were not useless, during your your adventures you have made {totalIncome} credits " +
+                $"and have played for {player.daysPlayed} days.\n");
+            Console.WriteLine("Press <ENTER> to close game");
+            Console.ReadLine();
         }
 
         static void BeginAdventure(UserProfile player, PlanetFactory[] smallGalaxy, SpaceShip[] spaceShip, TradeGood[] cargoInventory)
@@ -145,8 +146,6 @@ namespace SpaceEPirate
                         case 3:
                             currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
                             break;
-                        case 4:
-                            break;
                         default:
                             break;
                     }
@@ -155,9 +154,6 @@ namespace SpaceEPirate
                 } while (option < 3);
 
             } while(option != menuOptions || player.daysPlayed >= 14600);
-
-            Console.WriteLine("The Game is over");
-            Console.Read();
 
         }
 
