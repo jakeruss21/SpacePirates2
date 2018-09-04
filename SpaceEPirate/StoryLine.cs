@@ -56,7 +56,7 @@ namespace SpaceEPirate
             {
                 new SpaceShip("Simple Simon", 000, 3000, 10, 4),
                 new SpaceShip("Space Knight", 5000, 3500, 40, 7),
-                new SpaceShip("Avenger jet", 10000, 2000, 100, 9)
+                new SpaceShip("Avenger Jet", 10000, 2000, 100, 9)
                 
             };
 

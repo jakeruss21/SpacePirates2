@@ -25,7 +25,36 @@ namespace SpaceEPirate
 
 
         internal static SpaceShip ShipGarage(SpaceShip[] shipShop, SpaceShip currentShip, UserProfile player, TradeGood[] cargoHold)
-       {
+        {
+            int option = 0;
+            int numOptions = 3;
+
+            do
+            {
+                UserProfile.PrintUserInfo(player, currentShip);
+                Console.WriteLine($"What would you like to do? \n1. Buy a ship\n2. Refuel your ship \n3. Return to Planet Menu");
+
+                option = Utility.ErrorHandler(numOptions);
+
+                switch (option)
+                {
+                    case 1:
+                        currentShip = BuyShip(shipShop, currentShip, player, cargoHold);
+                        break;
+                    case 2:
+                        RefuelShip(currentShip, player);
+                        break;
+                    default:
+                        break;
+                }
+                Console.Clear();
+            } while (option != 3);
+
+            return currentShip;
+        }
+
+        internal static SpaceShip BuyShip(SpaceShip[] shipShop, SpaceShip currentShip, UserProfile player, TradeGood[] cargoHold)
+        { 
             int numOptions = shipShop.Length;            
             int shipChoice = 0;
 
@@ -64,8 +93,37 @@ namespace SpaceEPirate
                 shipShop[shipChoice].shipCost = 0;
                 return shipShop[shipChoice];
             }
-       }
+        }
         
+
+        internal static void RefuelShip (SpaceShip currentShip, UserProfile player)
+        {
+            double fuelFill = 0;
+
+            if(currentShip.shipName == "Simple Simon")
+            {
+                fuelFill = 10 - currentShip.fuelCapacity;
+                Console.WriteLine($"It will cost you {(int)fuelFill * 10}CC to refuel your ship");
+                Console.WriteLine("Press <ENTER> to continue");
+                currentShip.fuelCapacity += fuelFill;
+            }
+            else if(currentShip.shipName == "Space Knight")
+            {
+                fuelFill = 40 - currentShip.fuelCapacity;
+                Console.WriteLine($"It will cost you {(int)fuelFill * 10}CC to refuel your ship");
+                Console.WriteLine("Press <ENTER> to continue");
+                currentShip.fuelCapacity += fuelFill;
+            }
+            else if(currentShip.shipName == "Avenger Jet")
+            {
+                fuelFill = 100 - currentShip.fuelCapacity;
+                Console.WriteLine($"It will cost you {(int)fuelFill * 10}CC to refuel your ship");
+                Console.WriteLine("Press <ENTER> to continue");
+                currentShip.fuelCapacity += fuelFill;
+            }
+
+            player.cosmicCredits -= ((int)fuelFill * 10);
+        }
        
     }
 }
