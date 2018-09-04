@@ -34,5 +34,15 @@ namespace SpaceEPirate
             sell.quantity -= sellGoods;
         }
 
+        internal static int TotalCargoSize(TradeGood[] tradeGoods)
+        {
+            int cargoHold = 0;
+
+            for (int i = 0; i < tradeGoods.Length; i++)
+            {
+                cargoHold += (tradeGoods[i].size * tradeGoods[i].quantity);
+            }
+            return cargoHold;
+        }
     }
 }

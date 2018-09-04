@@ -138,7 +138,7 @@ namespace SpaceEPirate
                             Economy.MarketPlace(cargoInventory, player, currentShip);  //Pass current ShipObject, GoodObjects, and UserProfile object
                             break;
                         case 2:
-                            currentShip = SpaceShip.ShipGarage(spaceShip, currentShip, player);
+                            currentShip = SpaceShip.ShipGarage(spaceShip, currentShip, player, cargoInventory);
                             Console.WriteLine($"You are currently flying the {currentShip.shipName}");
                             currentShip.shipCost = 0;
                             Console.ReadLine();

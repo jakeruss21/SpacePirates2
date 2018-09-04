@@ -23,8 +23,8 @@ namespace SpaceEPirate
             topSpeed = iTopSpeed;
         }
 
-        
-       internal static SpaceShip ShipGarage(SpaceShip[] shipShop, SpaceShip currentShip, UserProfile player)
+
+        internal static SpaceShip ShipGarage(SpaceShip[] shipShop, SpaceShip currentShip, UserProfile player, TradeGood[] cargoHold)
        {
             int numOptions = shipShop.Length;            
             int shipChoice = 0;
@@ -50,7 +50,7 @@ namespace SpaceEPirate
                 System.Threading.Thread.Sleep(1000);
                 return currentShip;
             }
-            else if (shipChoice < player.cosmicCredits)
+            else if (shipShop[shipChoice].shipCost > player.cosmicCredits)
             {
                 Console.WriteLine("Sorry bud, you dont have enough cosmic credits to upgrade your ride. ");
                 Console.WriteLine("Please try again");
@@ -58,6 +58,10 @@ namespace SpaceEPirate
             }
             else
             {
+                // subtract the current cargo space from the new ship
+                shipShop[shipChoice].cargoCapacity -= TradeGood.TotalCargoSize(cargoHold);
+                player.cosmicCredits -= shipShop[shipChoice].shipCost;
+                shipShop[shipChoice].shipCost = 0;
                 return shipShop[shipChoice];
             }
        }

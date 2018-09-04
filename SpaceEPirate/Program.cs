@@ -20,7 +20,6 @@ namespace SpaceEPirate
                 //credits
                 //time 'lived'
 
-
             //Ship class
                 //Speed
                 //Fuel Consumption

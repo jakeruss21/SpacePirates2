@@ -16,7 +16,7 @@ namespace SpaceEPirate
             do
             {
                 UserProfile.PrintUserInfo(player, currentShip);
-                Console.WriteLine($"What would you like to do? \n1. Buy \n2. Sell \n3. View Inventory \n 4. Go to Planet Menu");
+                Console.WriteLine($"What would you like to do? \n1. Buy \n2. Sell \n3. View Inventory \n4. Go to Planet Menu");
 
                 option = Utility.ErrorHandler(numOptions);
 
@@ -57,9 +57,9 @@ namespace SpaceEPirate
             Console.WriteLine($"3. {tradeGoods[2].goodName}             {tradeGoods[2].cost}CC                   {tradeGoods[2].size} ");
             Console.WriteLine($"4. {tradeGoods[3].goodName}         {tradeGoods[3].cost}CC                    {tradeGoods[3].size} ");
 
-            goodType = Utility.ErrorHandler(numOptions);
+            goodType = (Utility.ErrorHandler(numOptions) - 1);
 
-            return goodType - 1;
+            return goodType;
         }
 
         internal static void SellGoods(TradeGood[] cargoInventory, UserProfile player, SpaceShip currentShip)
