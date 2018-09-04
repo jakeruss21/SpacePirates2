@@ -61,10 +61,6 @@ namespace SpaceEPirate
 
             UserProfile.PrintUserInfo(player, currentShip);
 
-            Console.WriteLine("Welcome to the ship garage. You may select or buy a ship you would like to fly." +
-                              $"You currently have {player.cosmicCredits}cc.");
-            Console.ReadLine();
-
             Console.WriteLine($"Please enter the number for the spaceship you want to buy or fly");
             Console.WriteLine($"=========================================================================");
             Console.WriteLine($"Item                 || Cost of Ship  || Amount of Cargo space avalible ");
@@ -84,6 +80,7 @@ namespace SpaceEPirate
             {
                 Console.WriteLine("Sorry bud, you dont have enough cosmic credits to upgrade your ride. ");
                 Console.WriteLine("Please try again");
+                Console.Read();
                 return currentShip;
             }
             else
@@ -92,6 +89,8 @@ namespace SpaceEPirate
                 shipShop[shipChoice].cargoCapacity -= TradeGood.TotalCargoSize(cargoHold);
                 player.cosmicCredits -= shipShop[shipChoice].shipCost;
                 shipShop[shipChoice].shipCost = 0;
+                Console.WriteLine($"You have purchased the {shipShop[shipChoice].shipName}!");
+                Console.Read();
                 return shipShop[shipChoice];
             }
         }

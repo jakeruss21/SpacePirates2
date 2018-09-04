@@ -66,6 +66,8 @@ namespace SpaceEPirate
             Console.Clear();
             StartPoint(player);
             BeginAdventure(player, smallGalaxy, shipShop, cargoInventory);
+            Console.WriteLine("");
+            Console.Read();
             EndGameMessage(player);
         }
 
@@ -89,6 +91,8 @@ namespace SpaceEPirate
             Console.ReadLine();
             Console.Clear();
         }
+
+
         public static void EndGameMessage(UserProfile player)
         {
             var totalIncome = player.cosmicCredits - 1000;
