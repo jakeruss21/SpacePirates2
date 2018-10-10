@@ -54,16 +54,16 @@ namespace SpaceEPirate
             switch (goodName)
             {
                 case "Oil":
-                    planetPrices = rand.Next() + 5;
+                    planetPrices = rand.Next(50) + 5;
                     break;
                 case "Silver":
-                    planetPrices = rand.Next() + 20;
+                    planetPrices = rand.Next(100) + 20;
                     break;
                 case "Gold":
-                    planetPrices = rand.Next() + 25;
+                    planetPrices = rand.Next(150) + 25;
                     break;
                 case "Titanium":
-                    planetPrices = rand.Next() + 50;
+                    planetPrices = rand.Next(500) + 50;
                     break;
                 default:
                     planetPrices = 0;

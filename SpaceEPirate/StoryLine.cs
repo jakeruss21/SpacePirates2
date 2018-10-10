@@ -126,12 +126,10 @@ namespace SpaceEPirate
                 do
                 {
                     UserProfile.PrintUserInfo(player, currentShip);
-                    Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \n1.The Trader's Market \n2.Shipshape Ship Shop\n" +
+                    Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \n1.The Trader's Market \n2.Shipshape's Ship Shop\n" +
                                       $"3.Travel to next planet \n4. Quit the Game");
 
                     option = Utility.ErrorHandler(menuOptions);
-
-                    Console.Clear();
 
                     switch (option)
                     {
