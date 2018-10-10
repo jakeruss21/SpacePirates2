@@ -44,5 +44,32 @@ namespace SpaceEPirate
             }
             return cargoHold;
         }
+
+
+        internal static int MarketValue(string goodName)
+        {
+            int planetPrices;
+            Random rand = new Random();
+
+            switch (goodName)
+            {
+                case "Oil":
+                    planetPrices = rand.Next() + 5;
+                    break;
+                case "Silver":
+                    planetPrices = rand.Next() + 20;
+                    break;
+                case "Gold":
+                    planetPrices = rand.Next() + 25;
+                    break;
+                case "Titanium":
+                    planetPrices = rand.Next() + 50;
+                    break;
+                default:
+                    planetPrices = 0;
+                    break;
+            }
+            return planetPrices;
+        }
     }
 }

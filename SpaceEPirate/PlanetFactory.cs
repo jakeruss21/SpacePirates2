@@ -17,7 +17,6 @@ namespace SpaceEPirate
             yCoord = iYCoord;
         }
 
-
         //public static int StartPlanet(PlanetFactory[] smallGalaxy)
         //{
         //    int choice = 0;
@@ -37,19 +36,5 @@ namespace SpaceEPirate
         //    return choice;
         //}
 
-
-
-        internal static int[] MarketValue(int numberOfGoods)
-        {
-            int[] planetPrices = new int[numberOfGoods];
-            Random rand = new Random();
-
-            for (int i = 0; i < numberOfGoods; i++)
-            {
-                planetPrices[i] = rand.Next(100);
-            }
-
-            return planetPrices;
-        }
     }
 }

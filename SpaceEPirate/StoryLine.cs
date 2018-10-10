@@ -95,13 +95,11 @@ namespace SpaceEPirate
 
         public static void EndGameMessage(UserProfile player)
         {
-            var totalIncome = player.cosmicCredits - 1000;
-
             Console.Clear();
             Console.WriteLine($"Your time has come to an end {player.userName}. Dont feel down young " +
-                $"Padawan your efforts were not useless, during your your adventures you have made {totalIncome} credits " +
+                $"Padawan your efforts were not useless, during your your adventures you have made {player.earnedCredits} credits " +
                 $"and have played for {player.daysPlayed} days.\n");
-            Console.WriteLine("Press <ENTER> to close game");
+            Console.WriteLine("Press <ENTER> to close the game.");
             Console.ReadLine();
         }
 
@@ -118,11 +116,11 @@ namespace SpaceEPirate
 
             do
             {
-                setGoodPrice = PlanetFactory.MarketValue(setGoodPrice.Length);
+                //setGoodPrice = PlanetFactory.MarketValue(setGoodPrice.Length);
 
                 for (int i = 0; i < setGoodPrice.Length; i++)
                 {
-                    cargoInventory[i].cost = setGoodPrice[i];
+                    cargoInventory[i].cost = TradeGood.MarketValue(cargoInventory[i].goodName);
                 }
 
                 do
