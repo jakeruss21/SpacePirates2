@@ -63,7 +63,6 @@ namespace SpaceEPirate
             StartPage();
 
             UserProfile player = new UserProfile();
-            Console.Clear();
             StartPoint(player);
             BeginAdventure(player, smallGalaxy, shipShop, cargoInventory);
             Console.WriteLine("");
@@ -74,19 +73,20 @@ namespace SpaceEPirate
 
         static void StartPoint(UserProfile player)
         {
+            Console.Clear();
             Console.WriteLine($"The year was 3058, the year of the dog. You, {player.userName}, have been working with your " +
                 $"grandfather for some time learning the family business, with the hope of one day taking over. " +
-                $"Little did he know that his time was coming. Your grandfather was mysteriously killed while on a " +
-                $"solo mission by the suspected jealous Space Bandit, Derricque! It is now up to you, {player.userName}, "+
-                $"to continue yourgrandfather's life passion, all while avenging his death!\n");
+                $"Little did he know that his time was coming to an end. Your grandfather was mysteriously killed while on a " +
+                $"solo mission commissioned by the notorious Space Bandit, Derrilique! It is now up to you, {player.userName}, "+
+                $"to continue yourgrandfather's life passion, and possibly even avenge his death...\n");
             
             Console.WriteLine("Press <Enter> to continue...");
             Console.ReadLine();
             Console.WriteLine("\n Instructions: You have been tasked to travel throughout the known territories to trade goods and make money. " +
                     $"You can trade goods at the Market on each planet. You can also purchase and repair your ship at Shipshape's " +
-                    $"Ship Shop. Travel to each different planet to trade the goods and make or lose credits. Make as much " +
+                    $"Ship Shop. Travel to each different planet to trade the goods and make a profit, hopefully. Make as much " +
                     $"profit as you can, as that will be the only way to find out what happened to your grandfather! But beware, you " +
-                     $"have a limited time before you're caught by Derricque! \nGood luck { player.userName}.\n");
+                    $"have a limited time before you're caught by Derrilique! \nGood luck {player.userName}.\n");
             Console.WriteLine("Press <Enter> to continue...");
             Console.ReadLine();
             Console.Clear();
@@ -97,6 +97,7 @@ namespace SpaceEPirate
         {
             var totalIncome = player.cosmicCredits - 1000;
 
+            Console.Clear();
             Console.WriteLine($"Your time has come to an end {player.userName}. Dont feel down young " +
                 $"Padawan your efforts were not useless, during your your adventures you have made {totalIncome} credits " +
                 $"and have played for {player.daysPlayed} days.\n");
