@@ -100,49 +100,46 @@ namespace SpaceEPirate
             Console.ReadLine();
         }
 
-        static void BeginAdventure(UserProfile player, PlanetFactory[] smallGalaxy, SpaceShip[] spaceShip, TradeGood[] cargoInventory)
+        static void BeginAdventure(UserProfile player, PlanetFactory[] smallGalaxy, SpaceShip[] spaceShip, TradeGood[] cargoTypes)
         {
             bool quit = false;
             string option;
 
-            PlanetFactory currentPlanet = smallGalaxy[0];
+            PlanetFactory currentPlanet = smallGalaxy[0];  //The user starts at Plant '0' which is Earth
 
-            int[] setGoodPrice = new int[cargoInventory.Length]; //Set prices of goods at new Planet
+            SpaceShip currentShip = spaceShip[0];  //This is the beginning ship
 
-            SpaceShip currentShip = spaceShip[0];
-
-            do
+            do  //The program will loop through this until they decide to quit or 14600 days (40 years) have passed
             {
-                //setGoodPrice = PlanetFactory.MarketValue(setGoodPrice.Length);
 
-                for (int i = 0; i < setGoodPrice.Length; i++)
+                for (int i = 0; i < cargoTypes.Length; i++)
                 {
-                    cargoInventory[i].cost = TradeGood.MarketValue(cargoInventory[i].goodName);
+                    cargoTypes[i].cost = TradeGood.MarketValue(cargoTypes[i].goodName);
                 }
 
-                do
+                do  //The user will stay at this planet until they decide to travel to another planet
                 {
-                    UserProfile.PrintUserInfo(player, currentShip);
+                    UserProfile.PrintUserInfo(player, currentShip);  //Keeps a header at the top of the game that displays the player's information as well as some information about the ship
                     Console.WriteLine($"Welcome to {currentPlanet.planetName}!  What would you like to do? \nVisit the Trader's Market    <Market>\nGo to Shipshape's Ship Shop  <Ship>\n" +
                                       $"Travel to the next planet    <Travel>\nQuit the Game <Quit>");
 
-                    option = Console.ReadLine();
+                    option = Console.ReadLine();  //String input for the option chosen by the player    //Error checked by the switch statement
 
                     switch (option)
                     {
                         case "Market":
-                            Economy.MarketPlace(cargoInventory, player, currentShip);  //Pass current ShipObject, GoodObjects, and UserProfile object
+                            Economy.MarketPlace(cargoTypes, player, currentShip);  //Goes to the Marketplace to buy and sell goods, as well as view their inventory
                             break;
                         case "Ship":
-                            currentShip = SpaceShip.ShipGarage(spaceShip, currentShip, player, cargoInventory);
+                            currentShip = SpaceShip.ShipGarage(spaceShip, currentShip, player, cargoTypes);  //Goes to the shipyard to buy a new ship
                             break;
                         case "Travel":
-                            currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);
+                            currentPlanet = Travel.GoSomewhere(player, currentShip, currentPlanet, smallGalaxy);  //Go somewhere else in this small part of the galaxy
                             break;
                         case "Quit":
                             quit = true;
                             break;
-                        default:
+                        default:                                                                                //Error handles any incorrect input
                             Console.WriteLine("Please enter a valid option.  The input is Case-sensative");
                             Console.WriteLine("Press <Enter> to try again.");
                             Console.ReadLine();
