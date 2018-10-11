@@ -37,5 +37,7 @@ namespace SpaceEPirate
 
             return option;
         }
+
+        //public static string StringErrorHandler(string )
     }
 }

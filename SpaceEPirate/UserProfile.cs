@@ -18,8 +18,7 @@ namespace SpaceEPirate
             earnedCredits = 0;
             daysPlayed = 0;
         }
-
-
+        
         internal static string UserName(string name = "")
         {
             Console.WriteLine(":::Character Creation:::");
