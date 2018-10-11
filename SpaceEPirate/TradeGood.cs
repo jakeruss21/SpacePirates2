@@ -10,23 +10,30 @@ namespace SpaceEPirate
         public int size = 0;
         public int quantity = 0;
         public int cost = 0;
+        public int prevBuy = 0;
 
         public TradeGood()
         {
 
         }
 
-        public TradeGood(string iName, int iSize, int iQuantity = 0, int iCost = 0)
+        public TradeGood(string iName, int iSize, int iQuantity = 0, int iCost = 0, int iPrevBuy = 0)
         {
             goodName = iName;
             size = iSize;
             quantity = iQuantity;
             cost = iCost;
+            prevBuy = iPrevBuy;
         }
 
         internal static void AddGoods(TradeGood add, int addGoods)
         {
             add.quantity += addGoods;
+        }
+
+        internal static void PreviousPurchase(TradeGood add, int purchase)
+        {
+            add.prevBuy = purchase;
         }
 
         internal static void SellGoods(TradeGood sell, int sellGoods)

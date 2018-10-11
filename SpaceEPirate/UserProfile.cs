@@ -15,7 +15,7 @@ namespace SpaceEPirate
         {
             userName = UserName();
             cosmicCredits = 1000;
-            earnedCredits = -1000;
+            earnedCredits = 0;
             daysPlayed = 0;
         }
 

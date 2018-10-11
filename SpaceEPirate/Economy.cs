@@ -9,9 +9,10 @@ namespace SpaceEPirate
         internal static void MarketPlace(TradeGood[] cargoInventory, UserProfile player, SpaceShip currentShip)
         {
             int option = 0;
-            int goodChoice = 0;
-            int addQuantity = 0;
+
             int numOptions = 4;
+
+            Console.Clear();
 
             do
             {
@@ -23,12 +24,12 @@ namespace SpaceEPirate
                 switch (option)
                 {
                     case 1:
-                        goodChoice = BuyGoods(cargoInventory);
-                        addQuantity = TotalCost(player, cargoInventory[goodChoice], currentShip);
-                        TradeGood.AddGoods(cargoInventory[goodChoice], addQuantity);
-                        Console.WriteLine($"There are now {cargoInventory[goodChoice].quantity} pieces of {cargoInventory[goodChoice].goodName} in your inventory.");
-                        Console.WriteLine("Press <ENTER> to continue...");
-                        Console.ReadLine();
+                        BuyGoods(player, cargoInventory, currentShip);
+                        //TotalCost(player, cargoInventory[goodChoice], currentShip);
+                        //TradeGood.AddGoods(cargoInventory[goodChoice], addQuantity);
+                        //Console.WriteLine($"There are now {cargoInventory[goodChoice].quantity} pieces of {cargoInventory[goodChoice].goodName} in your inventory.");
+                        //Console.WriteLine("Press <ENTER> to continue...");
+                        //Console.ReadLine();
                         break;
                     case 2:
                         SellGoods(cargoInventory, player, currentShip);
@@ -44,10 +45,10 @@ namespace SpaceEPirate
             } while (option != 4);
         }
 
-        internal static int BuyGoods(TradeGood[] tradeGoods)
+        internal static void BuyGoods(UserProfile player, TradeGood[] tradeGoods, SpaceShip spaceShip)
         {
             int numOptions = 4;
-            int goodType = 0;
+            int goodChoice = 0;
 
             Console.WriteLine($"Please enter the number for the good you would like to purchase");
             Console.WriteLine($"=========================================================================");
@@ -57,9 +58,10 @@ namespace SpaceEPirate
             Console.WriteLine($"3. {tradeGoods[2].goodName}             {tradeGoods[2].cost}CC                   {tradeGoods[2].size} ");
             Console.WriteLine($"4. {tradeGoods[3].goodName}         {tradeGoods[3].cost}CC                    {tradeGoods[3].size} ");
 
-            goodType = (Utility.ErrorHandler(numOptions) - 1);
+            goodChoice = (Utility.ErrorHandler(numOptions) - 1);
 
-            return goodType;
+            TotalCost(player, tradeGoods[goodChoice], spaceShip);
+
         }
 
         internal static void SellGoods(TradeGood[] cargoInventory, UserProfile player, SpaceShip currentShip)
@@ -82,9 +84,11 @@ namespace SpaceEPirate
             {
                 Console.WriteLine($"How much of {cargoInventory[goodType].goodName} would you like to sell?" +
                                   $"  You have currently have {cargoInventory[goodType].quantity} pieces of this product available to sell.");
+
                 sellQuantity = Utility.ErrorHandler(cargoInventory[goodType].quantity);
 
                 moneyMade = cargoInventory[goodType].cost * sellQuantity;
+
                 Console.WriteLine($"Congratulations! You made {moneyMade}cc off this transaction");
                 Console.WriteLine("Press <ENTER> to continue...");
                 Console.ReadLine();
@@ -111,7 +115,7 @@ namespace SpaceEPirate
         }
 
 
-        internal static int TotalCost(UserProfile player, TradeGood tradeGoods, SpaceShip spaceShips)
+        internal static void TotalCost(UserProfile player, TradeGood tradeGoods, SpaceShip spaceShips)
         {
             int totalCost = 0;
             int newCargo = 0;
@@ -146,9 +150,11 @@ namespace SpaceEPirate
             } while (insufficient == true);
 
             player.cosmicCredits -= totalCost;
-            spaceShips.cargoCapacity -= (quantity * tradeGoods.size);
+            TradeGood.AddGoods(tradeGoods, quantity);
 
-            return quantity;
+            spaceShips.cargoCapacity -= (quantity * tradeGoods.size);
+            tradeGoods.prevBuy = (tradeGoods.prevBuy + totalCost) / (tradeGoods.quantity + quantity);
+
         }
 
         public static void ViewInventory(TradeGood[] cargoInventory)
