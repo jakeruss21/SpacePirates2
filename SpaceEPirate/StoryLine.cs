@@ -111,7 +111,7 @@ namespace SpaceEPirate
 
             do  //The program will loop through this until they decide to quit or 14600 days (40 years) have passed
             {
-
+                
                 for (int i = 0; i < cargoTypes.Length; i++)
                 {
                     cargoTypes[i].cost = TradeGood.MarketValue(cargoTypes[i].goodName);

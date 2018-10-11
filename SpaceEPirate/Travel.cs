@@ -44,7 +44,7 @@ namespace SpaceEPirate
                 {
                     option = 0;
                     Console.WriteLine($"There are no planets within range.  Go fuel up the {currentShip.shipName}.");
-                    Console.Read();
+                    Console.ReadLine();
                     distance[option] = 0;
                 }
                 else
@@ -73,6 +73,7 @@ namespace SpaceEPirate
                 player.daysPlayed += timePassed;
 
                 currentPlanet = smallGalaxy[option];
+
                 return currentPlanet;
             }
         }
@@ -97,7 +98,7 @@ namespace SpaceEPirate
             speed = Math.Pow(warpSpeed, (10 / 3)) + Math.Pow((10 - warpSpeed), (-11 / 3));
             timeTraveled = (int)((365 / speed) * distance);
             Console.WriteLine($"You traveled {distance.ToString("#.00")} lightyears in {timeTraveled} days");
-            Console.Read();
+            Console.ReadLine();
             Console.Clear();
             return timeTraveled;
         }

@@ -153,7 +153,11 @@ namespace SpaceEPirate
             TradeGood.AddGoods(tradeGoods, quantity);
 
             spaceShips.cargoCapacity -= (quantity * tradeGoods.size);
-            tradeGoods.prevBuy = (tradeGoods.prevBuy + totalCost) / (tradeGoods.quantity + quantity);
+
+            if (quantity > 0)
+            {
+                tradeGoods.prevBuy = (tradeGoods.prevBuy + totalCost) / (tradeGoods.quantity + quantity);
+            }
 
         }
 
@@ -164,7 +168,7 @@ namespace SpaceEPirate
             Console.WriteLine("========================================================");
             for (int i = 0; i < cargoInventory.Length; i++)
             {
-                Console.WriteLine($"{i+1}. {cargoInventory[i].goodName}                {cargoInventory[i].quantity}                {cargoInventory[i].cost}");
+                Console.WriteLine($"{i+1}. {cargoInventory[i].goodName}              {cargoInventory[i].quantity}                 {cargoInventory[i].cost}");
             }
         }
 

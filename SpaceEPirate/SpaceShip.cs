@@ -33,8 +33,8 @@ namespace SpaceEPirate
             do
             {
                 UserProfile.PrintUserInfo(player, currentShip);
-                Console.WriteLine($"Welcome to Ship Shape's Ship Shop!\n" +
-                                  $"What would you like to do? \n1. Buy a ship\n2. Refuel your ship \n3. Return to Planet Menu");
+                Console.WriteLine($"Welcome to Ship Shape's Ship Shop! What would you like to do? " +
+                                  $"\n1. Buy a ship \n2. Refuel your ship \n3. Return to Planet Menu");
 
                 option = Utility.ErrorHandler(numOptions);
 
@@ -69,9 +69,9 @@ namespace SpaceEPirate
             Console.WriteLine($"===============================================================================================================");
             Console.WriteLine($"1. {shipShop[0].shipName}     || {shipShop[0].shipCost}CC           ||  {shipShop[0].cargoCapacity}     ||    {shipShop[0].totalFuelCapacity}    " +
                               $"  ||     {shipShop[0].topSpeed} ");
-            Console.WriteLine($"1. {shipShop[1].shipName}     || {shipShop[1].shipCost}CC           ||  {shipShop[1].cargoCapacity}     ||    {shipShop[1].totalFuelCapacity}    " +
+            Console.WriteLine($"2. {shipShop[1].shipName}     || {shipShop[1].shipCost}CC           ||  {shipShop[1].cargoCapacity}     ||    {shipShop[1].totalFuelCapacity}    " +
                               $"  ||     {shipShop[1].topSpeed} ");
-            Console.WriteLine($"1. {shipShop[2].shipName}     || {shipShop[2].shipCost}CC           ||  {shipShop[2].cargoCapacity}     ||    {shipShop[2].totalFuelCapacity}    " +
+            Console.WriteLine($"3. {shipShop[2].shipName}     || {shipShop[2].shipCost}CC           ||  {shipShop[2].cargoCapacity}     ||    {shipShop[2].totalFuelCapacity}    " +
                               $"  ||     {shipShop[0].topSpeed} ");
 
             shipChoice = Utility.ErrorHandler(numOptions) - 1;
@@ -97,7 +97,8 @@ namespace SpaceEPirate
                 currentShip.cargoCapacity += TradeGood.TotalCargoSize(cargoHold);
 
                 Console.WriteLine($"You have purchased the {shipShop[shipChoice].shipName}!");
-                Console.Read();
+                Console.ReadLine();
+                Console.Clear();
                 return shipShop[shipChoice];
             }
         }
@@ -146,8 +147,12 @@ namespace SpaceEPirate
 
             totFuelCost = Convert.ToInt32(costToFill);
 
+            Console.WriteLine($"You have purchased {option} units of fuel for {totFuelCost} CC.");
+            Console.ReadLine();
+            Console.Clear();
+
             player.cosmicCredits -= totFuelCost;
-            currentShip.currentFuelCapacity += option;            
+            currentShip.currentFuelCapacity += option;         
         }
        
     }
