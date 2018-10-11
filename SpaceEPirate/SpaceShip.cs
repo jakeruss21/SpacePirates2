@@ -6,23 +6,24 @@ namespace SpaceEPirate
 {
     class SpaceShip
     {
-        public string shipName = "";
-        public int shipCost = 0;
-        public int cargoCapacity = 0;
-        public double fuelCapacity = 0;
-        public int topSpeed = 0;
+        public string shipName;
+        public int shipCost;
+        public int cargoCapacity;
+        public double totalFuelCapacity;
+        public double currentFuelCapacity;
+        public int topSpeed;
         
-
-
+        
         public SpaceShip(string ishipName, int ishipCost, int icargoCapacity, double ifuelCapacity, int iTopSpeed)
         {
             shipName = ishipName;
             shipCost = ishipCost;
             cargoCapacity = icargoCapacity;
-            fuelCapacity = ifuelCapacity;
+            totalFuelCapacity = ifuelCapacity;
+            currentFuelCapacity = ifuelCapacity;
             topSpeed = iTopSpeed;
         }
-
+            
 
         internal static SpaceShip ShipGarage(SpaceShip[] shipShop, SpaceShip currentShip, UserProfile player, TradeGood[] cargoHold)
         {
@@ -54,6 +55,7 @@ namespace SpaceEPirate
             return currentShip;
         }
 
+
         internal static SpaceShip BuyShip(SpaceShip[] shipShop, SpaceShip currentShip, UserProfile player, TradeGood[] cargoHold)
         { 
             int numOptions = shipShop.Length;            
@@ -62,13 +64,16 @@ namespace SpaceEPirate
             UserProfile.PrintUserInfo(player, currentShip);
 
             Console.WriteLine($"Please enter the number for the spaceship you want to buy or fly");
-            Console.WriteLine($"=========================================================================");
-            Console.WriteLine($"Item                 || Cost of Ship  || Amount of Cargo space avalible ");
-            Console.WriteLine($"=========================================================================");
-            Console.WriteLine($"1. {shipShop[0].shipName}     || {shipShop[0].shipCost}CC           ||  {shipShop[0].cargoCapacity}      ");
-            Console.WriteLine($"2. {shipShop[1].shipName}      || {shipShop[1].shipCost}CC        ||  {shipShop[1].cargoCapacity}       ");
-            Console.WriteLine($"3. {shipShop[2].shipName}       || {shipShop[2].shipCost}CC        ||  {shipShop[2].cargoCapacity}       ");
-    
+            Console.WriteLine($"===============================================================================================================");
+            Console.WriteLine($"     Ship            || Cost of Ship  || Amount of Cargo space avalible   ||  Fuel Capacity     ||   Top Speed");
+            Console.WriteLine($"===============================================================================================================");
+            Console.WriteLine($"1. {shipShop[0].shipName}     || {shipShop[0].shipCost}CC           ||  {shipShop[0].cargoCapacity}     ||    {shipShop[0].totalFuelCapacity}    " +
+                              $"  ||     {shipShop[0].topSpeed} ");
+            Console.WriteLine($"1. {shipShop[1].shipName}     || {shipShop[1].shipCost}CC           ||  {shipShop[1].cargoCapacity}     ||    {shipShop[1].totalFuelCapacity}    " +
+                              $"  ||     {shipShop[1].topSpeed} ");
+            Console.WriteLine($"1. {shipShop[2].shipName}     || {shipShop[2].shipCost}CC           ||  {shipShop[2].cargoCapacity}     ||    {shipShop[2].totalFuelCapacity}    " +
+                              $"  ||     {shipShop[0].topSpeed} ");
+
             shipChoice = Utility.ErrorHandler(numOptions) - 1;
             if (shipChoice < 0)
             {
@@ -78,7 +83,7 @@ namespace SpaceEPirate
             }
             else if (shipShop[shipChoice].shipCost > player.cosmicCredits)
             {
-                Console.WriteLine("Sorry bud, you dont have enough cosmic credits to upgrade your ride. ");
+                Console.WriteLine("Sorry bud, you dont have enough cosmic credits to buy a new ride. ");
                 Console.WriteLine("Please try again");
                 Console.Read();
                 return currentShip;
@@ -89,6 +94,8 @@ namespace SpaceEPirate
                 shipShop[shipChoice].cargoCapacity -= TradeGood.TotalCargoSize(cargoHold);
                 player.cosmicCredits -= shipShop[shipChoice].shipCost;
                 shipShop[shipChoice].shipCost = 0;
+                currentShip.cargoCapacity += TradeGood.TotalCargoSize(cargoHold);
+
                 Console.WriteLine($"You have purchased the {shipShop[shipChoice].shipName}!");
                 Console.Read();
                 return shipShop[shipChoice];
@@ -98,31 +105,49 @@ namespace SpaceEPirate
 
         internal static void RefuelShip (SpaceShip currentShip, UserProfile player)
         {
-            double fuelFill = 0;
+            int fuelCost;
+            int totFuelCost;
+            double option;
+            double costToFill;
+            double neededFuel;
+            bool enoughMoney = false;
 
-            if(currentShip.shipName == "Simple Simon")
-            {
-                fuelFill = 10 - currentShip.fuelCapacity;
-                Console.WriteLine($"It will cost you {(int)fuelFill * 10}CC to refuel your ship");
-                Console.WriteLine("Press <ENTER> to continue");
-                currentShip.fuelCapacity += fuelFill;
-            }
-            else if(currentShip.shipName == "Space Knight")
-            {
-                fuelFill = 40 - currentShip.fuelCapacity;
-                Console.WriteLine($"It will cost you {(int)fuelFill * 10}CC to refuel your ship");
-                Console.WriteLine("Press <ENTER> to continue");
-                currentShip.fuelCapacity += fuelFill;
-            }
-            else if(currentShip.shipName == "Avenger Jet")
-            {
-                fuelFill = 100 - currentShip.fuelCapacity;
-                Console.WriteLine($"It will cost you {(int)fuelFill * 10}CC to refuel your ship");
-                Console.WriteLine("Press <ENTER> to continue");
-                currentShip.fuelCapacity += fuelFill;
-            }
+            Random rand = new Random();
 
-            player.cosmicCredits -= ((int)fuelFill * 10);
+            fuelCost = rand.Next(20);
+            neededFuel = currentShip.totalFuelCapacity - currentShip.currentFuelCapacity;
+            costToFill = fuelCost * neededFuel;
+
+            Console.WriteLine($"Fuel Cost: {fuelCost}");
+            Console.WriteLine($"Current Fuel Level: {currentShip.currentFuelCapacity}");
+            Console.WriteLine($"Fuel Capacity: {currentShip.totalFuelCapacity}");
+            Console.WriteLine($"Cost to fill: {costToFill}/n");
+
+            Console.WriteLine($"How many units of fuel would you like to put into the {currentShip.shipName}?/n" +
+                              $"You can fill up to {neededFuel}");
+
+            do
+            {
+                int canPay = player.cosmicCredits / fuelCost;
+
+                option = Utility.DoubleErrorHandler(neededFuel);
+                costToFill = option * fuelCost;
+                if(costToFill > player.cosmicCredits)
+                {
+                    Console.WriteLine("You don't have enough CC to purchase that much fuel");
+                    Console.WriteLine($"You only have enough CC to buy {canPay} units of fuel.");
+                    enoughMoney = false;
+                }
+                else
+                {
+                    enoughMoney = true;
+                }
+            } while (!enoughMoney);
+
+            totFuelCost = Convert.ToInt32(costToFill);
+
+            player.cosmicCredits -= totFuelCost;
+            currentShip.currentFuelCapacity += option;            
         }
        
     }

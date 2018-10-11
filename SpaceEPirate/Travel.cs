@@ -33,7 +33,7 @@ namespace SpaceEPirate
             {
                 for (i = 0; i < smallGalaxy.Length; i++)
                 {
-                    if (distance[i] > 0 && distance[i] <= currentShip.fuelCapacity)
+                    if (distance[i] > 0 && distance[i] <= currentShip.currentFuelCapacity)
                     {
                         Console.WriteLine($"{i + 1}. Planet {smallGalaxy[i].planetName} is {distance[i].ToString("#.000")} light years away");
                         j++;
@@ -52,12 +52,12 @@ namespace SpaceEPirate
                     Console.WriteLine("\n");
                     option = (Utility.ErrorHandler(i) - 1);
 
-                    if (currentShip.fuelCapacity < distance[option])
+                    if (currentShip.currentFuelCapacity < distance[option])
                     {
                         Console.WriteLine("You do not have enough fuel to reach that planet, please try again.\n");
                     }
                 }
-            }while (currentShip.fuelCapacity < distance[option]);
+            }while (currentShip.currentFuelCapacity < distance[option]);
 
             if (j == 0)
             {
@@ -69,7 +69,7 @@ namespace SpaceEPirate
 
                 int timePassed = TravelTime(warpSpeed, distance[option]);
 
-                currentShip.fuelCapacity = currentShip.fuelCapacity - distance[option];
+                currentShip.currentFuelCapacity -= distance[option];
                 player.daysPlayed += timePassed;
 
                 currentPlanet = smallGalaxy[option];
